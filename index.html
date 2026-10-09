@@ -5,11 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Dra. Larissa Lima | Clínica Médica</title>
-  <meta name="description" content="Dra. Larissa Lima — Clínica Médica. Agende sua consulta, conheça as especialidades e veja avaliações.">
-  <meta name="theme-color" content="#f5efe7">
+  <title>Dra. Larissa Lima | Links oficiais</title>
+  <meta
+    name="description"
+    content="Acesse os canais oficiais da Dra. Larissa Lima e agende seu atendimento médico."
+  >
 
-  <link rel="stylesheet" href="styles.css">
+  <link rel="canonical" href="https://links.dralarissalimaa.com.br/">
 
   <!-- Google Analytics 4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GS2WJ54Y5F"></script>
@@ -17,23 +19,35 @@
     window.dataLayer = window.dataLayer || [];
 
     function gtag() {
-      dataLayer.push(arguments);
+      window.dataLayer.push(arguments);
     }
 
     gtag('js', new Date());
-
     gtag('config', 'G-GS2WJ54Y5F');
 
-    // Registrar os parâmetros UTM da visita à landing page.
+    // Registrar parâmetros UTM da página de entrada.
     (function () {
-      var params = new URLSearchParams(window.location.search);
+      const params = new URLSearchParams(window.location.search);
 
-      var source = params.get('utm_source');
-      var medium = params.get('utm_medium');
-      var campaign = params.get('utm_campaign');
+      const source = params.get('utm_source');
+      const medium = params.get('utm_medium');
+      const campaign = params.get('utm_campaign');
 
-      if (!source && !medium && !campaign) {
-        return;
+      if (!source && !medium && !campaign) return;
+
+      // Evita duplicar o evento na mesma aba para a mesma campanha.
+      const eventKey = 'utm_landing_' + [
+        source || '',
+        medium || '',
+        campaign || ''
+      ].join('_');
+
+      try {
+        if (sessionStorage.getItem(eventKey)) return;
+
+        sessionStorage.setItem(eventKey, 'sent');
+      } catch (e) {
+        // Se o armazenamento estiver bloqueado, ainda envia o evento.
       }
 
       gtag('event', 'utm_landing', {
@@ -43,184 +57,159 @@
         page_location: window.location.href
       });
     })();
+
+    // Medir cliques em links de WhatsApp.
+    document.addEventListener('click', function (event) {
+      const link = event.target.closest('a');
+
+      if (!link || !link.href) return;
+
+      if (link.href.includes('wa.me') ||
+          link.href.includes('api.whatsapp.com')) {
+        gtag('event', 'clique_whatsapp', {
+          link_url: link.href,
+          link_text: (link.innerText || '').trim()
+        });
+      }
+    });
   </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      padding: 32px 18px;
+      background: #f8f5f1;
+      color: #49382d;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    main {
+      width: 100%;
+      max-width: 440px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .card {
+      padding: 30px 22px;
+      border: 1px solid #e9dfd5;
+      border-radius: 22px;
+      background: #fffdfa;
+      box-shadow: 0 8px 28px rgba(73, 56, 45, 0.06);
+    }
+
+    .avatar {
+      display: flex;
+      width: 94px;
+      height: 94px;
+      margin: 0 auto 18px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #80634f;
+      color: white;
+      font-size: 30px;
+      font-weight: 600;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 25px;
+    }
+
+    .subtitle {
+      margin: 10px 0 24px;
+      color: #88796d;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .links {
+      display: grid;
+      gap: 12px;
+    }
+
+    .links a {
+      display: block;
+      padding: 15px 18px;
+      border: 1px solid #e9dfd5;
+      border-radius: 13px;
+      background: #fff;
+      color: #624b3b;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .links a.primary {
+      border-color: #80634f;
+      background: #80634f;
+      color: white;
+    }
+
+    .links a:hover {
+      transform: translateY(-1px);
+      background: #f5eee6;
+    }
+
+    .links a.primary:hover {
+      background: #694e3d;
+    }
+
+    footer {
+      margin-top: 22px;
+      color: #96877b;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+  </style>
 </head>
 
 <body>
-  <main class="page">
+  <main>
+    <section class="card">
+      <div class="avatar" aria-hidden="true">LL</div>
 
-    <section class="profile">
-      <div class="hero-photo">
-        <img
-          src="https://www.dralarissalimaa.com.br/images/dra-larissa-hero.jpg"
-          alt="Dra. Larissa Lima"
-        >
+      <h1>Dra. Larissa Lima</h1>
 
-        <div class="photo-fade"></div>
+      <p class="subtitle">
+        Clínica Médica<br>
+        Acesse meus canais oficiais e agende seu atendimento.
+      </p>
 
-        <div class="identity">
-          <h1>Dra. Larissa Lima</h1>
-          <div class="identity-line">
-            <span></span>
-            <p>CLÍNICA MÉDICA</p>
-            <span></span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <nav class="links" aria-label="Links principais">
-
-      <a
-        class="link featured"
-        href="https://wa.me/5583998023806?text=Ol%C3%A1%2C%20Dra.%20Larissa!%20Gostaria%20de%20agendar%20uma%20consulta."
-        target="_blank"
-        rel="noopener"
-      >
-        <span class="icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <path d="M20.5 11.7a8.5 8.5 0 0 1-12.5 7.5L4 20l.9-3.8A8.5 8.5 0 1 1 20.5 11.7Z"/>
-            <path d="M8.8 8.2c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4l.7 1.5c.1.2.1.4 0 .6l-.5.6c.6 1.2 1.4 2 2.6 2.6l.6-.5c.2-.1.4-.1.6 0l1.5.7c.3.1.4.3.4.5v.5c0 .3-.1.5-.4.7-.5.3-1.1.4-1.7.2-2.1-.7-4.8-3.4-5.5-5.5-.2-.6-.1-1.2.2-1.7Z"/>
-          </svg>
-        </span>
-
-        <span class="link-content">
-          <strong>AGENDAR CONSULTA</strong>
-          <small>Agende seu atendimento pelo WhatsApp.</small>
-        </span>
-
-        <span class="arrow">→</span>
-      </a>
-
-      <a
-        class="link"
-        href="https://www.dralarissalimaa.com.br/#sobre"
-        target="_blank"
-        rel="noopener"
-      >
-        <span class="icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <path d="m12 3 8 4-8 4-8-4 8-4Z"/>
-            <path d="m4 12 8 4 8-4"/>
-            <path d="m4 17 8 4 8-4"/>
-          </svg>
-        </span>
-
-        <span class="link-content">
-          <strong>ESPECIALIDADES</strong>
-          <small>Conheça as especialidades e condições que acompanho.</small>
-        </span>
-
-        <span class="arrow">→</span>
-      </a>
-
-      <a
-        class="link"
-        href="https://www.dralarissalimaa.com.br/depoimentos.html"
-        target="_blank"
-        rel="noopener"
-      >
-        <span class="icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24">
-            <path d="M5 5.5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H10l-5 3v-3.5a2 2 0 0 1-2-2v-7.5a2 2 0 0 1 2-2Z"/>
-            <path d="M7.5 10h9M7.5 13h6"/>
-          </svg>
-        </span>
-
-        <span class="link-content">
-          <strong>AVALIAÇÕES</strong>
-          <small>Veja o que dizem os pacientes sobre o atendimento.</small>
-        </span>
-
-        <span class="arrow">→</span>
-      </a>
-
-    </nav>
-
-    <section class="connect">
-      <div class="connect-title">
-        <span></span>
-        <p>C O N E C T E - S E</p>
-        <span></span>
-      </div>
-
-      <div class="socials">
+      <nav class="links" aria-label="Links oficiais">
         <a
-          href="https://www.instagram.com/dralarissalimaa/"
+          class="primary"
+          href="https://wa.me/5583998023806?text=Ol%C3%A1%2C%20vim%20da%20pesquisa%20no%20Google%20e%20gostaria%20de%20agendar%20uma%20consulta%20m%C3%A9dica."
           target="_blank"
-          rel="noopener"
-          aria-label="Instagram"
+          rel="noopener noreferrer"
         >
-          <svg viewBox="0 0 24 24">
-            <rect x="3.5" y="3.5" width="17" height="17" rx="4"/>
-            <circle cx="12" cy="12" r="4"/>
-            <circle cx="17.4" cy="6.7" r="1"/>
-          </svg>
+          Agendar consulta pelo WhatsApp
         </a>
 
         <a
-          href="https://wa.me/5583998023806"
+          href="https://www.instagram.com/dralarissalima/"
           target="_blank"
-          rel="noopener"
-          aria-label="WhatsApp"
+          rel="noopener noreferrer"
         >
-          <svg viewBox="0 0 24 24">
-            <path d="M20.5 11.7a8.5 8.5 0 0 1-12.5 7.5L4 20l.9-3.8A8.5 8.5 0 1 1 20.5 11.7Z"/>
-            <path d="M8.8 8.2c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4l.7 1.5c.1.2.1.4 0 .6l-.5.6c.6 1.2 1.4 2 2.6 2.6l.6-.5c.2-.1.4-.1.6 0l1.5.7c.3.1.4.3.4.5v.5c0 .3-.1.5-.4.7-.5.3-1.1.4-1.7.2-2.1-.7-4.8-3.4-5.5-5.5-.2-.6-.1-1.2.2-1.7Z"/>
-          </svg>
+          Instagram
         </a>
-      </div>
+
+        <a href="https://www.dralarissalimaa.com.br/">
+          Site oficial
+        </a>
+      </nav>
     </section>
 
-    <footer>CRM-PB 20015</footer>
-
+    <footer>
+      Dra. Larissa Lima · Clínica Médica
+    </footer>
   </main>
-
-  <!-- Rastreamento dos cliques nos links -->
-  <script>
-    document.querySelectorAll('.links a').forEach(function (link) {
-      link.addEventListener('click', function () {
-        var title = link.querySelector('strong');
-        var name = title
-          ? title.textContent.trim()
-          : link.getAttribute('aria-label');
-
-        var events = {
-          'AGENDAR CONSULTA': 'click_agendar_consulta',
-          'ESPECIALIDADES': 'click_especialidades',
-          'AVALIAÇÕES': 'click_avaliacoes',
-          'Instagram': 'click_instagram',
-          'WhatsApp': 'click_whatsapp'
-        };
-
-        var eventName = events[name];
-
-        if (eventName) {
-          gtag('event', eventName, {
-            link_url: link.href,
-            transport_type: 'beacon'
-          });
-        }
-      });
-    });
-
-    document.querySelectorAll('.socials a').forEach(function (link) {
-      link.addEventListener('click', function () {
-        var name = link.getAttribute('aria-label');
-
-        var events = {
-          'Instagram': 'click_instagram',
-          'WhatsApp': 'click_whatsapp'
-        };
-
-        if (events[name]) {
-          gtag('event', events[name], {
-            link_url: link.href,
-            transport_type: 'beacon'
-          });
-        }
-      });
-    });
-  </script>
 </body>
 </html>
