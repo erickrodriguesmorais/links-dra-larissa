@@ -1,142 +1,44 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dra. Larissa Lima | Clínica Médica</title>
-  <meta name="description" content="Dra. Larissa Lima — Clínica Médica. Agende sua consulta, conheça as especialidades e veja avaliações.">
-  <meta name="theme-color" content="#f5efe7">
-  <link rel="stylesheet" href="styles.css">
 
-  <!-- Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GS2WJ54Y5F"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-GS2WJ54Y5F');
-    
-const campaignParams = new URLSearchParams(window.location.search);
+<!-- Google Analytics 4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-GS2WJ54Y5F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
 
-const source = campaignParams.get('utm_source');
-const medium = campaignParams.get('utm_medium');
-const campaign = campaignParams.get('utm_campaign');
+  function gtag() {
+    dataLayer.push(arguments);
+  }
 
-if (source || medium || campaign) {
-  const landingKey = 'utm_landing_' +
-    [source, medium, campaign].join('_');
+  gtag('js', new Date());
+  gtag('config', 'G-GS2WJ54Y5F');
 
-  if (!sessionStorage.getItem(landingKey)) {
+  // Registra a campanha UTM quando a página é aberta com parâmetros.
+  (function () {
+    const params = new URLSearchParams(window.location.search);
+
+    const source = params.get('utm_source');
+    const medium = params.get('utm_medium');
+    const campaign = params.get('utm_campaign');
+
+    if (!source && !medium && !campaign) return;
+
+    const storageKey = 'utm_landing_' + [
+      source || '',
+      medium || '',
+      campaign || ''
+    ].join('_');
+
+    try {
+      if (sessionStorage.getItem(storageKey)) return;
+      sessionStorage.setItem(storageKey, 'sent');
+    } catch (error) {
+      // O rastreamento continua mesmo se o armazenamento estiver bloqueado.
+    }
+
     gtag('event', 'utm_landing', {
       utm_source: source || '(not set)',
       utm_medium: medium || '(not set)',
       utm_campaign: campaign || '(not set)',
       page_location: window.location.href
     });
-
-    sessionStorage.setItem(landingKey, 'sent');
-  }
-}
-
-  </script>
-</head>
-<body>
-  <main class="page">
-    <section class="profile">
-      <div class="hero-photo">
-        <img src="https://www.dralarissalimaa.com.br/images/dra-larissa-hero.jpg" alt="Dra. Larissa Lima">
-        <div class="photo-fade"></div>
-        <div class="identity">
-          <h1>Dra. Larissa Lima</h1>
-          <div class="identity-line"><span></span><p>CLÍNICA MÉDICA</p><span></span></div>
-        </div>
-      </div>
-    </section>
-
-    <nav class="links" aria-label="Links principais">
-      <a class="link featured" href="https://wa.me/5583998023806?text=Ol%C3%A1%2C%20Dra.%20Larissa!%20Gostaria%20de%20agendar%20uma%20consulta." target="_blank" rel="noopener">
-        <span class="icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M20.5 11.7a8.5 8.5 0 0 1-12.5 7.5L4 20l.9-3.8A8.5 8.5 0 1 1 20.5 11.7Z"/><path d="M8.8 8.2c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4l.7 1.5c.1.2.1.4 0 .6l-.5.6c.6 1.2 1.4 2 2.6 2.6l.6-.5c.2-.1.4-.1.6 0l1.5.7c.3.1.4.3.4.5v.5c0 .3-.1.5-.4.7-.5.3-1.1.4-1.7.2-2.1-.7-4.8-3.4-5.5-5.5-.2-.6-.1-1.2.2-1.7Z"/></svg>
-        </span>
-        <span class="link-content"><strong>AGENDAR CONSULTA</strong><small>Agende seu atendimento pelo WhatsApp.</small></span>
-        <span class="arrow">→</span>
-      </a>
-
-      <a class="link" href="https://www.dralarissalimaa.com.br/#sobre" target="_blank" rel="noopener">
-        <span class="icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="m12 3 8 4-8 4-8-4 8-4Z"/><path d="m4 12 8 4 8-4"/><path d="m4 17 8 4 8-4"/></svg>
-        </span>
-        <span class="link-content"><strong>ESPECIALIDADES</strong><small>Conheça as especialidades e condições que acompanho.</small></span>
-        <span class="arrow">→</span>
-      </a>
-
-      <a class="link" href="https://www.dralarissalimaa.com.br/depoimentos.html" target="_blank" rel="noopener">
-        <span class="icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><path d="M5 5.5h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H10l-5 3v-3.5a2 2 0 0 1-2-2v-7.5a2 2 0 0 1 2-2Z"/><path d="M7.5 10h9M7.5 13h6"/></svg>
-        </span>
-        <span class="link-content"><strong>AVALIAÇÕES</strong><small>Veja o que dizem os pacientes sobre o atendimento.</small></span>
-        <span class="arrow">→</span>
-      </a>
-    </nav>
-
-    <section class="connect">
-      <div class="connect-title"><span></span><p>C O N E C T E - S E</p><span></span></div>
-      <div class="socials">
-        <a href="https://www.instagram.com/dralarissalimaa/" target="_blank" rel="noopener" aria-label="Instagram">
-          <svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="4"/><circle cx="12" cy="12" r="4"/><circle cx="17.4" cy="6.7" r="1"/></svg>
-        </a>
-        <a href="https://wa.me/5583998023806" target="_blank" rel="noopener" aria-label="WhatsApp">
-          <svg viewBox="0 0 24 24"><path d="M20.5 11.7a8.5 8.5 0 0 1-12.5 7.5L4 20l.9-3.8A8.5 8.5 0 1 1 20.5 11.7Z"/><path d="M8.8 8.2c.2-.4.4-.4.7-.4h.5c.2 0 .4.1.5.4l.7 1.5c.1.2.1.4 0 .6l-.5.6c.6 1.2 1.4 2 2.6 2.6l.6-.5c.2-.1.4-.1.6 0l1.5.7c.3.1.4.3.4.5v.5c0 .3-.1.5-.4.7-.5.3-1.1.4-1.7.2-2.1-.7-4.8-3.4-5.5-5.5-.2-.6-.1-1.2.2-1.7Z"/></svg>
-        </a>
-      </div>
-    </section>
-
-    <footer>CRM-PB 20015</footer>
-  </main>
-    <script>
-    document.querySelectorAll('.links a').forEach(function(link) {
-      link.addEventListener('click', function() {
-        var texto = link.querySelector('strong');
-        var nome = texto ? texto.textContent.trim() : link.getAttribute('aria-label');
-
-        if (!nome) return;
-
-        var eventos = {
-          'AGENDAR CONSULTA': 'click_agendar_consulta',
-          'ESPECIALIDADES': 'click_especialidades',
-          'AVALIAÇÕES': 'click_avaliacoes',
-          'Instagram': 'click_instagram',
-          'WhatsApp': 'click_whatsapp'
-        };
-
-        var evento = eventos[nome];
-        if (evento && typeof gtag === 'function') {
-          gtag('event', evento, {
-            link_url: link.href,
-            transport_type: 'beacon'
-          });
-        }
-      });
-    });
-
-    document.querySelectorAll('.socials a').forEach(function(link) {
-      link.addEventListener('click', function() {
-        var nome = link.getAttribute('aria-label');
-        var eventos = {
-          'Instagram': 'click_instagram',
-          'WhatsApp': 'click_whatsapp'
-        };
-
-        if (eventos[nome] && typeof gtag === 'function') {
-          gtag('event', eventos[nome], {
-            link_url: link.href,
-            transport_type: 'beacon'
-          });
-        }
-      });
-    });
-  </script>
-</body>
-</html>
-</body>
-</html>
+  })();
+</script>
