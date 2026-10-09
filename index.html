@@ -15,6 +15,29 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'G-GS2WJ54Y5F');
+    
+const campaignParams = new URLSearchParams(window.location.search);
+
+const source = campaignParams.get('utm_source');
+const medium = campaignParams.get('utm_medium');
+const campaign = campaignParams.get('utm_campaign');
+
+if (source || medium || campaign) {
+  const landingKey = 'utm_landing_' +
+    [source, medium, campaign].join('_');
+
+  if (!sessionStorage.getItem(landingKey)) {
+    gtag('event', 'utm_landing', {
+      utm_source: source || '(not set)',
+      utm_medium: medium || '(not set)',
+      utm_campaign: campaign || '(not set)',
+      page_location: window.location.href
+    });
+
+    sessionStorage.setItem(landingKey, 'sent');
+  }
+}
+
   </script>
 </head>
 <body>
